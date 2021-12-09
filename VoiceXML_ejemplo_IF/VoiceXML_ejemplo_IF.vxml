@@ -1,0 +1,20 @@
+<vxml version="2.1" xml:lang="es-ES">
+	<form id="obtener_ciudades_origen_destino">
+	   <field name="ciudad_origen">
+	      <grammar src="ciudades.jsgf"/>
+	      <prompt>¿Desde que ciudad deseas salir?</prompt>
+	   </field>
+	   <field name="ciudad_destino">
+	      <grammar src="ciudades.jsgf"/>
+	      <prompt>¿A que ciudad quieres viajar?</prompt>
+	   </field>
+	   <filled mode="all" namelist="ciudad_origen ciudad_destino">
+	      <if cond="ciudad_origen == ciudad_destino">
+	         <prompt>La ciudad de salida no puede ser igual que la de destino.</prompt>
+	         <clear/>
+	      <else/>
+	         <prompt>¿Has dicho que quieres viajar desde <value expr="ciudad_origen"/> a <value expr="ciudad_destino"/> </prompt>
+	      </if>
+	   </filled>  
+	</form>
+</vxml>	

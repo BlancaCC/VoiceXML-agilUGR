@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="es-ES">
+
+<menu>
+
+  <field name="destino">
+    <prompt>
+       Bienvenido a ágil U G R, para hablar espa�ol, pulse 1 o diga espa�ol, si quieres hablar in inglis pulse 2 o diga in inglis. 
+    </prompt>
+    <choice dtmf="1" next= 
+    
+</menu>
+
+</vxml>

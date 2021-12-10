@@ -11,17 +11,15 @@
   <choice dtmf="2" next="http://www.weather.example.com/intro.vxml"/>
   <choice dtmf="3" next="http://www.stargazer.example.com/astronews.vxml"/>
 -->
-<menu>
+<menu id = "main">
+    <prompt>
+        Bienvenido a ágil U G R, para hablar español, pulse 1 o diga
+        español, if yu wuan to espic in inglis touch to.
 
-  <field name="destino" value="dtmf">
-      <prompt>
-          Bienvenido a ágil U G R, para hablar español, pulse 1 o diga
-          español, if yu wuan to espic in inglis touch to.
-
-      </prompt>
-      <choice dtmf="1" next="http://webhosting.voxeo.net/207891/www/AgilUGR/spanishSalida.xml" />
-      <choice dtmf="2" next="http://webhosting.voxeo.net/207891/www/AgilUGR/englishSalida.xml" />
-  </field>
+    </prompt>
+    <choice dtmf="1" next="http://webhosting.voxeo.net/207891/www/AgilUGR/spanishSalida.xml">uno </choice>
+    <choice dtmf="2" next="http://webhosting.voxeo.net/207891/www/AgilUGR/englishSalida.xml"> dos </choice>
+    <nomatch> No has especificado ningun idioma</nomatch>
 
 
 </menu>

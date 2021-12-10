@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xml:lang="es-ES">
 
-<!-- Esto es lo que hay que 
+<!-- Esto es lo que hay que
 <property name="inputmodes" value="dtmf"/>
   <prompt>
    For sports press 1, For weather press 2, For Stargazer
@@ -14,15 +14,16 @@
 <menu>
 
   <field name="destino" value="dtmf">
-    <prompt>
-       Bienvenido a ágil U G R, para hablar español, pulse 1 o diga 
-       español, if yu wuan to espic in inglis touch to. 
+      <prompt>
+          Bienvenido a ágil U G R, para hablar español, pulse 1 o diga
+          español, if yu wuan to espic in inglis touch to.
 
-    </prompt>
-    <choice dtmf="1" next="http://webhosting.voxeo.net/207891/www/AgilUGR/spanishSalida.xml" />
-    <choice dtmf="2" next="http://webhosting.voxeo.net/207891/www/AgilUGR/englishSalida.xml" />
+      </prompt>
+      <choice dtmf="1" next="http://webhosting.voxeo.net/207891/www/AgilUGR/spanishSalida.xml" />
+      <choice dtmf="2" next="http://webhosting.voxeo.net/207891/www/AgilUGR/englishSalida.xml" />
+  </field>
 
-    
+
 </menu>
 
 </vxml>

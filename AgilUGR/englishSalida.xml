@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="en-US">
+
 <!--
 Fichero inicial en ingles, despues de que el usuario haya elegido hablar en español
 -->
-<?xml version="1.0" encoding="UTF-8"?>
-<vxml version="2.1" xml:lang="en-US">
 
 <form id="datos" scope="document">
     <!-- Pedimos al usuario que nos diga su nombre, para almacenarlo -->
@@ -10,7 +11,7 @@ Fichero inicial en ingles, despues de que el usuario haya elegido hablar en espa
         <prompt> Hello my friend. Please tell me your name</prompt>
     </field>
     <filled>
-        <prompt>So your name is <value expr="nombreUsuario"></prompt>
+        <prompt>So your name is <value expr="nombreUsuario" /></prompt>
         </filled>
     </form>
 </vxml>

@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xml:lang="es-ES">
 
+<!-- Esto es lo que hay que 
+<property name="inputmodes" value="dtmf"/>
+  <prompt>
+   For sports press 1, For weather press 2, For Stargazer
+   astrophysics press 3.
+  </prompt>
+  <choice dtmf="1" next="http://www.sports.example.com/vxml/start.vxml"/>
+  <choice dtmf="2" next="http://www.weather.example.com/intro.vxml"/>
+  <choice dtmf="3" next="http://www.stargazer.example.com/astronews.vxml"/>
+-->
 <menu>
 
-  <field name="destino">
+  <field name="destino" value="dtmf">
     <prompt>
-       Bienvenido a ágil U G R, para hablar espa�ol, pulse 1 o diga espa�ol, si quieres hablar in inglis pulse 2 o diga in inglis. 
+       Bienvenido a ágil U G R, para hablar español, pulse 1 o diga 
+       español, if yu wuan to espic in inglis touch to. 
+
     </prompt>
-    <choice dtmf="1" next= 
+    <choice dtmf="1" next="http://webhosting.voxeo.net/207891/www/AgilUGR/spanishSalida.xml" />
+    <choice dtmf="2" next="http://webhosting.voxeo.net/207891/www/AgilUGR/englishSalida.xml" />
+
     
 </menu>
 

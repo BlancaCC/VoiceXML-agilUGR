@@ -5,13 +5,14 @@
 Fichero inicial en español, despues de que el usuario haya elegido hablar en español
 -->
 
-<form id="datos" scope="document">
-    <!-- Pedimos al usuario que nos diga su nombre, para almacenarlo -->
-    <field name = "nombreUsuario">
-        <prompt> Hola querido amigo ¿cómo te llamas?</prompt>
+<form id="tomar_nombre_usuario" scope="document">
+    <!-- PedinombreUsuariomos al usuario que nos diga su nombre, para almacenarlo -->
+    <field name = "asignatura">
+	    <grammar src="asignaturas.jsgf"/>
+        <prompt> Hola querido amigo ¿de qué asignatura quieres información?</prompt>
     </field>
-    <filled>
-        <prompt>El nombre que me has dado es <value expr="nombreUsuario" /></prompt>
-        </filled>
+    <filled mode="all" namelist="asignatura">
+        <prompt>El nombre que me has dado es <value expr="asignatura" /></prompt>
+    </filled>
     </form>
 </vxml>

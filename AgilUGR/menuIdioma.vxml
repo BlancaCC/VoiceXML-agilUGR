@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="es-ES">
+
+<!-- Menú de selección de idioma
+Para solventar que XML no permite múltiples idiomas en el mismo fichero, nos basaremos
+en la similitud fonética del español con el inglés. 
+-->
+<menu id = "main">
+    <prompt>
+        Bienvenido a ágil U G R, para hablar español, pulse 1 o diga
+        español, if yu wuan to espic in inglis touch to.
+
+    </prompt>
+    <choice dtmf="1" next="http://webhosting.voxeo.net/207891/www/AgilUGR/es-menu-inicio.vxml">uno </choice>
+    <choice dtmf="2" next="http://webhosting.voxeo.net/207891/www/AgilUGR/englishSalida.xml"> dos </choice>
+    <nomatch> No has especificado ningun idioma</nomatch>
+
+</menu>
+
+</vxml>

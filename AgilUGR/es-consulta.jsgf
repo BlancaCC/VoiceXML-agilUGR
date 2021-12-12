@@ -1,0 +1,5 @@
+#JSGF V1.0;
+
+grammar consulta;
+
+public <consulta>= proximos eventos| N P I  | P L | nuevos paradigmas de interacción | procesadores de lenguajes | salir;

@@ -1,5 +1,7 @@
 <vxml version="2.1" xml:lang="es-ES" application="es-consulta.vxml">
 
+<!-- Fichero en el que manejamos las consultas sobre ciertas asignaturas y eventos -->
+
 <!-- La primera sección que debe ejecutarse es centrosMenu -->
 <link next="\consultaMenu">
 </link>
@@ -7,42 +9,53 @@
 <!--Variable auxiliar necesaria para almacenar el tipo de información que se ha preguntado -->
 <var name="tipo_informacion"/>
 
-
-
 <!-- Evento que proporciona información sobre próximos eventos -->
 
-<!-- Fecha y actividad del evento
-Si se contara con una base de datos Bastaría con extraer la información 
+<!--
+Fecha y actividad del evento
+Si se contara con una base de datos Bastaría con extraer la información
 con algún tipo de API, como este no es el caso, se generará de manera aleatoria
 -->
+
 <!-- Variables-->
-  <var name="tipo_de_evento" />
-  <var name="dia" />
-  <var name="mes" />
-  <var name="asignatura" />
+<var name="tipo_de_evento" />
+<var name="dia" />
+<var name="mes" />
+<var name="asignatura" />
 
 <script>
-	var dia_aleatorio  =  Math.floor(Math.random() * 28) // día del 1 al 30
-	// mes
-	var meses_candidatos = ["diciembre", "enero", "febrero"]
-	var mes_seleccionado = meses_candidatos[Math.floor(Math.random() * meses_candidatos.length)];
-	// evento
-	var eventos = ["entrega prácticas", "examen parcial", "defensa prácticas"]
-	var evento_seleccionado = eventos[Math.floor(Math.random() * eventos.length)];
+    // Generamos un dia aleatorio, del 1 al 28
+	var dia_aleatorio  =  Math.floor(Math.random() * 28)
 
-// todo aleatoria asignatura 
-	// almacenamos los datos anteriores en las variables de xml
+    // Los meses que podemos escoger son diciembre, enero y febrero
+	var meses_candidatos = ["diciembre", "enero", "febrero"]
+
+    // Seleccionamos aleatoriamente un mes entre los candidatos
+	var mes_seleccionado = meses_candidatos[Math.floor(Math.random() * meses_candidatos.length)];
+
+    // Del mismo modo, generamos una lista de eventos candidatos y escogemos
+    // aleatoriamente entre esta lista
+	var eventos_candidatos = ["entrega prácticas", "examen parcial", "defensa prácticas"]
+	var evento_seleccionado = eventos_candidatos[Math.floor(Math.random() * eventos_candidatos.length)];
+
+    // Repetimos el proceso para fijar la asignatura
+    var asignaturas_candidatas = ["N P I", "V C", "P L"]
+    var asignatura_seleccionada = asignaturas_candidatas[Math.floor(Math.random() * asignaturas_candidatas.length)]
+
+    // TODO -- hay que arreglar esta seccion de JavaScript
+	// Almacenamos los datos anteriores en las variables de xml
   <![CDATA[
 	tipo_de_evento = evento_seleccionado;
 	dia = dia_aleatorio;
-	mes = mes_seleccionado; 
-  ]]> 
+	mes = mes_seleccionado;
+    asignatura = asignatura_seleccionada;
+  ]]>
 </script>
 
 
 <catch event="event.proximosEventos">
 	<prompt bargein="false">
-		El siguiente evento que tiene usted es  <value expr="tipo_de_evento"/> el día <value expr="dia"/> 
+		El siguiente evento que tiene usted es  <value expr="tipo_de_evento"/> el día <value expr="dia"/>
 		de <value expr="mes"/>.
 	</prompt>
 	<goto next="#preguntarOtraCosa"/>
@@ -55,9 +68,9 @@ con algún tipo de API, como este no es el caso, se generará de manera aleatori
 	</prompt>
 	<if cond="tipo_informacion == 'P L'">
 		<prompt>
-			El proximo evento sobre la asignatura de PL es 
+			El proximo evento sobre la asignatura de PL es
 		</prompt>
-	<!-- TODO  
+	<!-- TODO
 	<elseif cond="tipo_informacion == 'telefono'"/>
 		<prompt>
 			El telefono de la Facultad de ciencias es 9 5 8 2 4 3 3 8 0
@@ -76,9 +89,9 @@ con algún tipo de API, como este no es el caso, se generará de manera aleatori
 
 <!--
 	Menú de selección .
-	El sistema pregunta por qué información se desea tener: 
-        - Evento más próximo o en una fecha determinada.  
-        - Eventos para una asignatura determinada. 
+	El sistema pregunta por qué información se desea tener:
+        - Evento más próximo o en una fecha determinada.
+        - Eventos para una asignatura determinada.
 	Si el usuario responde salir, el sistema vuelve al menu principal
 	Si el sistema no entiende al usuario con una confianza superior al 60%, lo avisa y vuelve a preguntar.
 -->

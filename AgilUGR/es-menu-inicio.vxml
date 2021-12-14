@@ -28,7 +28,7 @@ así cómo poder salirse
 <menu id="EscogerSeccion">
 		<prompt bargein="false">
 			Puedo ayudarle en la consulta o creación de eventos. Indíqueme también si desea salir.
-			Or chein yor idion.
+			Or chein yor idiom.
 		</prompt>
         <!-- Posibles expresiones para la consulta de eventos-->
 		<choice next="es-consulta.vxml">
@@ -53,7 +53,7 @@ así cómo poder salirse
 		</choice>
 		<!-- Change idiom -->
 		<choice next="menuIdioma.vxml">
-			idion
+			idiom
 		</choice>
 		<enumerate/>
 

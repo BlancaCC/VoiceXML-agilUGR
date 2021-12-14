@@ -2,4 +2,4 @@
 
 grammar consulta;
 
-public <consulta>= proximos eventos| N P I  | P L | nuevos paradigmas de interacción | procesadores de lenguajes | salir;
+public <consulta>= proximos eventos|N P I|P L| nuevos paradigmas de interacción | procesadores de lenguajes | crear | nuevo | salir;

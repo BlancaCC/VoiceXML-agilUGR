@@ -7,37 +7,53 @@
 <!--Variable auxiliar necesaria para almacenar el tipo de información que se ha preguntado -->
 <var name="tipo_informacion"/>
 
-<!-- Evento que proporciona información soQuiero salirbre la etsiit -->
-<catch event="event.etsiit">
+
+
+<!-- Evento que proporciona información sobre próximos eventos -->
+
+<!-- Fecha y actividad del evento
+Si se contara con una base de datos Bastaría con extraer la información 
+con algún tipo de API, como este no es el caso, se generará de manera aleatoria
+-->
+<!-- Variables-->
+  <var name="tipo_de_evento" />
+  <var name="dia" />
+  <var name="mes" />
+
+<script>
+	var dia_aleatorio  =  Math.floor(Math.random() * 28) // día del 1 al 30
+	// mes
+	var meses_candidatos = ["diciembre", "enero", "febrero"]
+	var mes_seleccionado = meses_candidatos[Math.floor(Math.random() * meses_candidatos.length)];
+	// evento
+	var eventos = ["entrega prácticas", "examen parcial", "defensa prácticas"]
+	var evento_seleccionado = eventos[Math.floor(Math.random() * eventos.length)];
+
+	// almacenamos los datos anteriores en las variables de xml
+  <![CDATA[
+	tipo_de_evento = evento_seleccionado;
+	dia = dia_aleatorio;
+	mes = mes_seleccionado; 
+  ]]> 
+</script>
+
+
+<catch event="event.proximosEventos">
 	<prompt bargein="false">
-		Has preguntado por la ETSIIT
+		El siguiente evento que tiene usted es  <value expr="tipo_de_evento"/> el día <value expr="dia"/> 
+		de <value expr="mes"/>.
 	</prompt>
-	<if cond="tipo_informacion == 'direccion'">
-		<prompt>
-			La direccion de la ETSIIT es Calle Periodista Daniel Saucedo Aranda, s/n, 18014 Granada
-		</prompt>
-	<elseif cond="tipo_informacion == 'telefono'"/>
-		<prompt>
-			El telefono de la ETSIIT es 9 5 8 2 4 2 8 0 2
-		</prompt>
-	<elseif cond="tipo_informacion == 'delegacion'"/>
-		<prompt>
-			La delegacion de la ETSIIT es la DEIIT
-		</prompt>
-	</if>
-
 	<goto next="#preguntarOtraCosa"/>
-
 </catch>
 
-<!-- Evento que proporciona información sobre la facultad de ciencias -->
-<catch event="event.ciencias">
+<!-- Se pregunta por suna asignatura concreta-->
+<catch event="event.asignatura">
 	<prompt bargein="false">
-		Has preguntado por la Facultad de Ciencias
+		Lso sigueintes eventos que tiene usted son
 	</prompt>
-	<if cond="tipo_informacion == 'direccion'">
+	<if cond="tipo_informacion == 'P L'">
 		<prompt>
-			La direccion de la Facultad de ciencias es Avenida de Fuente Nueva, s/n, 18071 Granada
+			El proximo evento sobre la asignatura de PL es 
 		</prompt>
 	<elseif cond="tipo_informacion == 'telefono'"/>
 		<prompt>
@@ -53,28 +69,6 @@
 
 </catch>
 
-<!-- Evento que proporciona información sobre la facultad de bellas artes -->
-<catch event="event.bellas">
-	<prompt bargein="false">
-		Has preguntado por la Facultad de Bellas Artes
-	</prompt>
-	<if cond="tipo_informacion == 'direccion'">
-		<prompt>
-			La direccion de la Facultad de bellas artes es Calle Periodista Eugenio Selles, s/n, 18014 Granada
-		</prompt>
-	<elseif cond="tipo_informacion == 'telefono'"/>
-		<prompt>
-			El telefono de la Facultad de bellas artes 9 5 8 2 4 3 8 1 9
-		</prompt>
-	<elseif cond="tipo_informacion == 'delegacion'"/>
-		<prompt>
-			La delegacion de la Facultad de bellas artes es la DEBBAA
-		</prompt>
-	</if>
-
-	<goto next="#preguntarOtraCosa"/>
-
-</catch>
 
 <!--
 	Menú de selección .
@@ -91,7 +85,8 @@
             Asignaturas posibles son N P I, nuenvos paradigmas de interacción, y P L, procesadores de lenguaje.
 		</prompt>
 		<catch event="nomatch noinput">
-			Puedo proporcionarte información de la escuela de informatica, la facultad de ciencias y la facultad de Bellas Artes. Tambien puedes decirme <emp>salir</emp> para volver al menu principal.
+			Puedo proporcionarte información  sobre tus próximos eventos o brindarte la posibilidad de crear otros nuevos.
+			 Tambien puedes decirme <emp>salir</emp> para volver al menu principal.
 			<reprompt/>
 		</catch>
 		<grammar src="es-consulta.jsgf"/>
@@ -105,32 +100,20 @@
 		</filled>
 	</field>
 
-	<field name="informacion">
-		<prompt>
-			Que necesitas saber?
-		</prompt>
-		<catch event="nomatch noinput">
-			Puedes preguntarme sobre su dirección, su telefono y su delegación de centro
-			<reprompt/>
-		</catch>
-		<grammar src="info_centros.jsgf"/>
-		<filled>
-			<if cond="0.6 > informacion$.confidence">
-				Perdona, no te he entendido, me has preguntado sobre la <value expr="informacion"/> de la <value expr="centro"/>?
-				<clear namelist="informacion"/>
-			</if>
-		</filled>
-	</field>
-
 	<filled mode="all" namelist="centro informacion">
 		<assign name="tipo_informacion" expr="informacion"/>
 		<clear namelist="confirmacion_centro confirmacion_info"/>
-		<if cond="centro == 'escuela de informatica'">
-			<throw event="event.etsiit"/>
-		<elseif cond="centro == 'facultad de ciencias'"/>
-			<throw event="event.ciencias"/>
-		<elseif cond="centro == 'facultad de bellas artes'"/>
-			<throw event="event.bellas"/>
+		<if cond="tipoInformacion == 'proximos eventos'">
+			<throw event="event.proximosEventos"/>
+		<!-- informacion de una asignatura concreta -->
+		<elseif cond="tipoInformacion == 'N P I'"/>
+			<throw event="event.asignatura"/>
+		<elseif cond="tipoInformacion == 'nuevos paradigmas de interacción'"/>
+			<throw event="event.asignatura"/>
+		<elseif cond="tipoInformacion == 'P L'"/>
+			<throw event="event.asignatura"/>
+		<elseif cond="tipoInformacion == 'procesadores de lenguaje'"/>
+			<throw event="event.asignatura"/>
 		</if>
 	</filled>
 </form>
@@ -143,18 +126,18 @@
 <form id="preguntarOtraCosa">
 	<field name="repetir">
 		<prompt>
-			Necesitas mas informacion?
+			¿Necesitas más información?
 		</prompt>
-		<grammar src="yesno.jsgf"/>
+		<grammar src="es-sino.jsgf"/>
 		<catch event="nomatch noinput">
-			No te he entendido, responde si o no.
+			No te he entendido, responde sí o no.
 		</catch>
 	</field>
 	<filled>
 		<if cond="repetir == 'si'">
-			<goto next="#centrosMenu"/>
+			<goto next="#consultaMenu"/>
 		<else/>
-			<goto next="arandita_main.vxml#EscogerSeccion"/>
+			<goto next="es-menu-inicio.vxml#EscogerSeccion"/>
 		</if>
 	</filled>
 </form>

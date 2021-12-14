@@ -3,6 +3,9 @@
 
 <!--
 Fichero inicial en español, despues de que el usuario haya elegido hablar en español
+
+Se encarga de dar la bienvenida al sistema al usuario y presentar las diferenctes opciones
+así cómo poder salirse
 -->
 
 <form id="tomar_nombre_usuario" scope="document">

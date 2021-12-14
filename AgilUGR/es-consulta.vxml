@@ -123,7 +123,7 @@ con algún tipo de API, como este no es el caso, se generará de manera aleatori
         <clear namelist="confirmacion_centro confirmacion_info"/>
         <if cond="tipoInformacion == 'proximos eventos'">
             <throw event="event.proximosEventos"/>
-        [> informacion de una asignatura concreta <]
+        <!-- informacion de una asignatura concreta  -->
         <elseif cond="tipoInformacion == 'N P I'"/>
             <throw event="event.asignatura"/>
         <elseif cond="tipoInformacion == 'nuevos paradigmas de interacción'"/>

@@ -33,10 +33,10 @@ así cómo poder salirse
 			Próximos
 		</choice>
         <!-- Expresiones para la creación-->
-		<choice next="comedores.vxml">
+		<choice next="es-creacion.vxml">
 			Crear
 		</choice>
-		<choice next="centros.vxml">
+		<choice next="es-creacion.vxml">
 			Añadir
 		</choice>
         <!-- Expresiones para salir-->

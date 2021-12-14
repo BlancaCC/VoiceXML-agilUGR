@@ -6,23 +6,19 @@
 <link next="\consultaMenu">
 </link>
 
-<!-- Variable auxiliar necesaria para almacenar el tipo de información que se ha preguntado  -->
-<var name="tipo_informacion"/>
-
-<!-- Evento que proporciona información sobre próximos eventos  -->
-
-<!--
-Fecha y actividad del evento
-Si se contara con una base de datos Bastaría con extraer la información
-con algún tipo de API, como este no es el caso, se generará de manera aleatoria
--->
-
 <!-- Variables -->
 <var name="tipo_de_evento" />
 <var name="dia" />
 <var name="mes" />
 <var name="asignatura" />
+<var name="tipo_informacion"/>
 
+<!--
+Generamos todos los valores de para las variables anteriores de forma
+aleatoria. Si se contara con algun tipo de API, se consultarian los datos
+de dicha API. Como no es el caso, nos conformamos con generar estas variables
+de forma aleatoria
+-->
 <script>
   <![CDATA[
     // Generamos un dia aleatorio, del 1 al 28
@@ -52,111 +48,13 @@ con algún tipo de API, como este no es el caso, se generará de manera aleatori
   ]]>
 </script>
 
-
-<catch event="event.proximosEventos">
-    <prompt bargein="false">
-        El siguiente evento que tiene usted es  <value expr="tipo_de_evento"/> el día <value expr="dia"/>
-        de <value expr="mes"/>.
-    </prompt>
-    <goto next="#preguntarOtraCosa"/>
-</catch>
-
-<!-- Se pregunta por suna asignatura concreta -->
-<catch event="event.asignatura">
-    <prompt bargein="false">
-        Los siguientes eventos que tiene usted son
-    </prompt>
-    <if cond="tipo_informacion == 'P L'">
-        <prompt>
-            El proximo evento sobre la asignatura de PL es
-        </prompt>
-    <!-- TODO
-    <elseif cond="tipo_informacion == 'telefono'"/>
-        <prompt>
-            El telefono de la Facultad de ciencias es 9 5 8 2 4 3 3 8 0
-        </prompt>
-    <elseif cond="tipo_informacion == 'delegacion'"/>
-        <prompt>
-            La delegacion de la Facultad de ciencias es la DEFC
-        </prompt>
-    -->
-    </if>
-
-    <goto next="#preguntarOtraCosa"/>
-
-</catch>
-
-
-<!--
-    Menú de selección .
-    El sistema pregunta por qué información se desea tener:
-        - Evento más próximo o en una fecha determinada.
-        - Eventos para una asignatura determinada.
-    Si el usuario responde salir, el sistema vuelve al menu principal
-    Si el sistema no entiende al usuario con una confianza superior al 60%, lo avisa y vuelve a preguntar.
--->
-<form id="consultaMenu">
-    <field name="tipoInformacion">
-        <prompt>
-            ¿Deseas información de los próximos eventos o de los eventos de alguna asignatura en cuestión?
-            Asignaturas posibles son N P I, nuenvos paradigmas de interacción, y P L, procesadores de lenguaje.
-        </prompt>
-        <catch event="nomatch noinput">
-            Puedo proporcionarte información  sobre tus próximos eventos o brindarte la posibilidad de crear otros nuevos.
-             Tambien puedes decirme <emp>salir</emp> para volver al menu principal.
-            <reprompt/>
-        </catch>
-        <grammar src="es-consulta.jsgf"/>var name
-        <filled>
-        Has seleccionado <value expr="tipoInformacion"/>
-            <if cond="tipoInformacion== 'salir'">
-                <goto next="es-menu-inicio.vxml#EscogerSeccion"/>
-            <elseif cond="0.6 > tipoInformacion$.confidence"/>
-                Perdona, no te he entendido bien, me has preguntado por <value expr="tipoInformacion"/>?
-                <clear namelist="tipoInformacion"/>
-            </if>
-        </filled>
+<form id="consultaMenu" scope="document">
+    <field name = "asignatura">
+	    <grammar src="asignaturas.jsgf"/>
+        <prompt> Hola querido amigo ¿de qué asignatura quieres información?</prompt>
     </field>
-
-    <filled mode="all" namelist="centro informacion">
-        <assign name="tipo_informacion" expr="informacion"/>
-        <clear namelist="confirmacion_centro confirmacion_info"/>
-        <if cond="tipoInformacion == 'proximos eventos'">
-            <throw event="event.proximosEventos"/>
-        <!-- informacion de una asignatura concreta  -->
-        <elseif cond="tipoInformacion == 'N P I'"/>
-            <throw event="event.asignatura"/>
-        <elseif cond="tipoInformacion == 'nuevos paradigmas de interacción'"/>
-            <throw event="event.asignatura"/>
-        <elseif cond="tipoInformacion == 'P L'"/>
-            <throw event="event.asignatura"/>
-        <elseif cond="tipoInformacion == 'procesadores de lenguaje'"/>
-            <throw event="event.asignatura"/>
-        </if>
+    <filled mode="all" namelist="asignatura">
+        <prompt>El nombre que me has dado es <value expr="asignatura" /></prompt>
     </filled>
-</form>
-<!--
-    Este formulario se ejecuta siempre que ya se ha devuelto alguna información
-    Si se requiere más información se vuelve al menú de selección y si no se pasa
-    al menú principal
--->
-<form id="preguntarOtraCosa">
-    <field name="repetir">
-        <prompt>
-            ¿Necesitas más información?
-        </prompt>
-        <grammar src="es-sino.jsgf"/>
-        <catch event="nomatch noinput">
-            No te he entendido, responde sí o no.
-        </catch>
-    </field>
-    <filled>
-        <if cond="repetir == 'si'">
-            <goto next="#consultaMenu"/>
-        <else/>
-            <goto next="es-menu-inicio.vxml#EscogerSeccion"/>
-        </if>
-    </filled>
-</form>
-
+    </form>
 </vxml>

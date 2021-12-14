@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xml:lang="es-ES">
 
-<!-- La primera sección en ejecutarse es el menú principal  -->
-<link next="\MainMenu">
-</link>
-
 <!--
 Fichero inicial en español, despues de que el usuario haya elegido hablar en español
 
 Se encarga de dar la bienvenida al sistema al usuario y presentar las diferenctes opciones
 así cómo poder salirse
 -->
+
+<!-- La primera sección en ejecutarse es el menú principal  -->
+<link next="\MainMenu">
+</link>
+
+<!-- Menu principal -->
 <form id="MainMenu">
 	<block>
 		<prompt bargein="false">
-			Hola. Soy el asistente conversacional de ágil U G R. 
+			Hola. Soy el asistente conversacional de ágil U G R.
 		</prompt>
 		<goto next="#EscogerSeccion"/>
 	</block>
 </form>
 
+<!-- Seleccion de la seccion. Es lo que se ejecuta tras el menu principal -->
 <menu id="EscogerSeccion">
 		<prompt bargein="false">
-			Puedo ayudarle en la consulta o creación de eventos. Indíqueme también si desea salir. 
-			Or chein yor idion. 
+			Puedo ayudarle en la consulta o creación de eventos. Indíqueme también si desea salir.
+			Or chein yor idion.
 		</prompt>
         <!-- Posibles expresiones para la consulta de eventos-->
 		<choice next="es-consulta.vxml">

@@ -64,7 +64,7 @@ con algún tipo de API, como este no es el caso, se generará de manera aleatori
 <!-- Se pregunta por suna asignatura concreta -->
 <catch event="event.asignatura">
     <prompt bargein="false">
-        Lso sigueintes eventos que tiene usted son
+        Los siguientes eventos que tiene usted son
     </prompt>
     <if cond="tipo_informacion == 'P L'">
         <prompt>

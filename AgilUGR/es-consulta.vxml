@@ -21,30 +21,36 @@ de forma aleatoria
 -->
 <script>
   <![CDATA[
-    // Generamos un dia aleatorio, del 1 al 28
-    var dia_aleatorio  =  Math.floor(Math.random() * 28)
+    // // Generamos un dia aleatorio, del 1 al 28
+    // var dia_aleatorio  =  Math.floor(Math.random() * 28)
 
-    // Los meses que podemos escoger son diciembre, enero y febrero
-    var meses_candidatos = ["diciembre", "enero", "febrero"]
+    // // Los meses que podemos escoger son diciembre, enero y febrero
+    // var meses_candidatos = ["diciembre", "enero", "febrero"]
 
-    // Seleccionamos aleatoriamente un mes entre los candidatos
-    var mes_seleccionado = meses_candidatos[Math.floor(Math.random() * meses_candidatos.length)];
+    // // Seleccionamos aleatoriamente un mes entre los candidatos
+    // var mes_seleccionado = meses_candidatos[Math.floor(Math.random() * meses_candidatos.length)];
 
-    // Del mismo modo, generamos una lista de eventos candidatos y escogemos
-    // aleatoriamente entre esta lista
-    var eventos_candidatos = ["entrega prácticas", "examen parcial", "defensa prácticas"]
-    var evento_seleccionado = eventos_candidatos[Math.floor(Math.random() * eventos_candidatos.length)];
+    // // Del mismo modo, generamos una lista de eventos candidatos y escogemos
+    // // aleatoriamente entre esta lista
+    // var eventos_candidatos = ["entrega prácticas", "examen parcial", "defensa prácticas"]
+    // var evento_seleccionado = eventos_candidatos[Math.floor(Math.random() * eventos_candidatos.length)];
 
-    // Repetimos el proceso para fijar la asignatura
-    var asignaturas_candidatas = ["N P I", "V C", "P L"]
-    var asignatura_seleccionada = asignaturas_candidatas[Math.floor(Math.random() * asignaturas_candidatas.length)]
+    // // Repetimos el proceso para fijar la asignatura
+    // var asignaturas_candidatas = ["N P I", "V C", "P L"]
+    // var asignatura_seleccionada = asignaturas_candidatas[Math.floor(Math.random() * asignaturas_candidatas.length)]
 
-    // TODO -- hay que arreglar esta seccion de JavaScript
-    // Almacenamos los datos anteriores en las variables de xml
-    tipo_de_evento = evento_seleccionado;
-    dia = dia_aleatorio;
-    mes = mes_seleccionado;
-    asignatura = asignatura_seleccionada;
+    // // TODO -- hay que arreglar esta seccion de JavaScript
+    // // Almacenamos los datos anteriores en las variables de xml
+    // tipo_de_evento = evento_seleccionado;
+    // dia = dia_aleatorio;
+    // mes = mes_seleccionado;
+    // asignatura = asignatura_seleccionada;
+
+    // Pruebo a usar variables hardcodeadas
+    tipo_de_evento = "Examen";
+    dia = 13;
+    mes = "enero";
+    asignatura = "N P I";
   ]]>
 </script>
 

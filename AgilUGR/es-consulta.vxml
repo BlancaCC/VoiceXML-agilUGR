@@ -1,4 +1,4 @@
-<vxml version="2.1" xml:lang="es-ES" application="spanishSalida.vxml">
+<vxml version="2.1" xml:lang="es-ES" application="es-consulta.vxml">
 
 <!-- La primera sección que debe ejecutarse es centrosMenu -->
 <link next="\consultaMenu">
@@ -19,6 +19,7 @@ con algún tipo de API, como este no es el caso, se generará de manera aleatori
   <var name="tipo_de_evento" />
   <var name="dia" />
   <var name="mes" />
+  <var name="asignatura" />
 
 <script>
 	var dia_aleatorio  =  Math.floor(Math.random() * 28) // día del 1 al 30
@@ -29,6 +30,7 @@ con algún tipo de API, como este no es el caso, se generará de manera aleatori
 	var eventos = ["entrega prácticas", "examen parcial", "defensa prácticas"]
 	var evento_seleccionado = eventos[Math.floor(Math.random() * eventos.length)];
 
+// todo aleatoria asignatura 
 	// almacenamos los datos anteriores en las variables de xml
   <![CDATA[
 	tipo_de_evento = evento_seleccionado;
@@ -55,6 +57,7 @@ con algún tipo de API, como este no es el caso, se generará de manera aleatori
 		<prompt>
 			El proximo evento sobre la asignatura de PL es 
 		</prompt>
+	<!-- TODO  
 	<elseif cond="tipo_informacion == 'telefono'"/>
 		<prompt>
 			El telefono de la Facultad de ciencias es 9 5 8 2 4 3 3 8 0
@@ -63,6 +66,7 @@ con algún tipo de API, como este no es el caso, se generará de manera aleatori
 		<prompt>
 			La delegacion de la Facultad de ciencias es la DEFC
 		</prompt>
+	-->
 	</if>
 
 	<goto next="#preguntarOtraCosa"/>
@@ -89,10 +93,11 @@ con algún tipo de API, como este no es el caso, se generará de manera aleatori
 			 Tambien puedes decirme <emp>salir</emp> para volver al menu principal.
 			<reprompt/>
 		</catch>
-		<grammar src="es-consulta.jsgf"/>
+		<grammar src="es-consulta.jsgf"/>var name
 		<filled>
+		Has seleccionado <value expr="tipoInformacion"/>
 			<if cond="tipoInformacion== 'salir'">
-				<goto next="spaninshSalida.vxml#EscogerSeccion"/>
+				<goto next="es-menu-inicio.vxml#EscogerSeccion"/>
 			<elseif cond="0.6 > tipoInformacion$.confidence"/>
 				Perdona, no te he entendido bien, me has preguntado por <value expr="tipoInformacion"/>?
 				<clear namelist="tipoInformacion"/>

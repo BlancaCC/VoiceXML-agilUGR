@@ -1,27 +1,24 @@
 <vxml version="2.1" xml:lang="es-ES" application="es-creacion.vxml">
 
+<!-- Fichero en el que definimos toda la funcionalidad para crear los nuevos eventos -->
+
 <!-- La primera sección que debe ejecutarse es centrosMenu -->
 <link next="\crearMenu">
 </link>
 
-<!--Variable auxiliar necesaria para almacenar el tipo de información que se ha preguntado -->
-<var name="tipo_informacion"/>
-
-<!-- Evento que proporciona información sobre próximos eventos -->
-
-<!-- Fecha y actividad del evento -->
 <!-- Variables-->
-  <var name="hora" expr="por saber"/>
-  <var name="dia" expr="todavia no estipulado"/>
-  <var name="mes" expr="desconocido"/>
-
+<var name="hora" expr="por saber"/>
+<var name="dia" expr="todavia no estipulado"/>
+<var name="mes" expr="desconocido"/>
+<var name="tipo_informacion"/> <!-- Necesitamos esta variable auxiliar para saber el tipo de -->
+                               <!-- informacion que se ha preguntado -->
 <!--
-	Menú de selección .
-	El sistema pregunta por qué información se desea tener: 
-        - Evento más próximo o en una fecha determinada.  
-        - Eventos para una asignatura determinada. 
-	Si el usuario responde salir, el sistema vuelve al menu principal
-	Si el sistema no entiende al usuario con una confianza superior al 60%, lo avisa y vuelve a preguntar.
+Menú de creacion.
+
+El sistema:
+    1. Pregunta el tipo de evento a crear y confirma
+    2. Pregunta la fecha para crearlo y confirma
+    3. Muestra que se ha creado y pregunta si se quiere crear mas eventos
 -->
 <form id="crearMenu">
 	<field name="evento">
@@ -32,7 +29,7 @@
 	</field>
     <field name="confirma_evento" type="boolean" cond="0.6">
         ¿has dicho <val expr="evento" /> ?
-        <!-- Si n se ha introducido se vuelve a pedir el tipo de evento-->
+        <!-- Si no se ha introducido se vuelve a pedir el tipo de evento-->
         <filled>
             <if cond="!confirma_evento">
                 <clear namelist="evento"/>
@@ -44,12 +41,12 @@
     <prompt>¿Cuándo quieres crearlo?</prompt>
     <grammar src="es-fecha.jsgf"/>
     <!-- Esta gramática modifica las variables dia mes hora
-    Tiene cierta flexivilidad-->
+    Tiene cierta flexibilidad-->
     </field>
 
     <field name="confirma_fecha" type="boolean" cond="0.6">
         ¿has dicho el <val expr="dia" />  del mes <val expr="mes"/> por la <val expr="hora" />?
-        <!-- Si n se ha introducido se vuelve a pedir el tipo de evento-->
+        <!-- Si no se ha introducido se vuelve a pedir el tipo de evento-->
         <filled>
             <if cond="!confirma_evento">
                 <clear namelist="fecha"/>
@@ -68,7 +65,7 @@
 <form id="finCreacion">
 	<field name="repetir">
 		<prompt>
-			Ya ha introducido su evento correctamente 
+			Ya ha introducido su evento correctamente
             ¿Quiere crear otro evento?
 		</prompt>
 		<grammar src="es-sino.jsgf"/>

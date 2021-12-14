@@ -7,6 +7,10 @@
 - Sergio Quijano Rey  
 - Irene Pérez Martínez    
 
+## Objetivos  
+
+Creación y consulta de eventos por voz. 
+
 ## Estructura  
 
 Puesto que el sistema incluye dos idiomas: ingles y español, la sílaba inicial del fichero indica el idioma: 

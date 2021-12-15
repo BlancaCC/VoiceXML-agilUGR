@@ -72,7 +72,7 @@
   <form id="asignatura">
     <field name="respuesta">
         <prompt>
-          -De la asignatura <value expr="asignaturaPreguntada"/> tienes este viernes hasta las doce de la noche la entrega final. 
+          De la asignatura <value expr="asignaturaPreguntada"/> tienes este viernes hasta las doce de la noche la entrega final. 
           Mucho ánimo.
 
           ¿Quieres que repita el evento o quieres salir?

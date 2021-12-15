@@ -2,4 +2,6 @@
 
 grammar consulta;
 
-public <consulta>= si | no | vale ;
+public <consulta>= <afirmativo> | <negativo> ;
+<afirmativo> = si | vale | claro;
+<negativo> = no | repetir | salir;

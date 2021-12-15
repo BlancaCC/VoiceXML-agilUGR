@@ -1,89 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vxml version="2.1" xml:lang="es-ES">
+<vxml version="2.1" xml:lang="es-ES"> 
+  <!-- Variables globales -->
+  <var name="eventoGuardado"/>
 
-
-<!-- TODO - Este fichero tiene errores internos -->
-
-<!-- Fichero en el que definimos toda la funcionalidad para crear los nuevos eventos -->
-
-<!-- La primera sección que debe ejecutarse es centrosMenu -->
-<link next="\crearMenu">
-</link>
-
-<!-- Variables-->
-<var name="hora" expr="por saber"/>
-<var name="dia" expr="todavia no estipulado"/>
-<var name="mes" expr="desconocido"/>
-<var name="tipo_informacion"/> <!-- Necesitamos esta variable auxiliar para saber el tipo de -->
-                               <!-- informacion que se ha preguntado -->
-<!--
-Menú de creacion.
-
-El sistema:
-    1. Pregunta el tipo de evento a crear y confirma
-    2. Pregunta la fecha para crearlo y confirma
-    3. Muestra que se ha creado y pregunta si se quiere crear mas eventos
--->
-<form id="crearMenu">
-	<field name="evento">
-		<prompt>
-			¿Qué evento desea crear?
-		</prompt>
-        <!-- Debe de aceptar cualquier cosa-->
-	</field>
-    <field name="confirma_evento" type="boolean" cond="0.6">
-        ¿has dicho <val expr="evento" /> ?
-        <!-- Si no se ha introducido se vuelve a pedir el tipo de evento-->
-        <filled>
-            <if cond="!confirma_evento">
-                <clear namelist="evento"/>
-            </if>
-        </filled>
+  <!--
+    Formulario del evento a crear
+  -->
+  <form id="crearEvento">
+    <field name="evento">
+      <prompt timeout="3s">
+        Qué evento deseas crear
+      </prompt>
+      <catch event="nomatch noinput">
+        Dime el evento a registrar
+        <reprompt/>
+      </catch>
+      <grammar src="es-eventos.jsgf"/>
+      <filled>
+        Has dicho ¿<value expr="evento"/>? 
+        <!-- Todo aquí da un error de que no encuentra la pagina web WTF-->
+        <goto next="#confirmarEvento"/>
+      </filled>
     </field>
+  </form>
 
-    <field name="fecha">
-    <prompt>¿Cuándo quieres crearlo?</prompt>
-    <grammar src="es-fecha.jsgf"/>
-    <!-- Esta gramática modifica las variables dia mes hora
-    Tiene cierta flexibilidad-->
+  <form id="confirmarEvento">
+    <field name="confirmar">
+      <prompt timeout="3s">
+        diga sí o no
+      </prompt>
+      <catch event="nomatch noinput">
+        Dime el evento a registrar
+        <reprompt/>
+      </catch>
+      <grammar src="es-sino.jsgf"/>
+      <filled>
+        Has dicho ¿<value expr="confirmar"/>?
+
+        <goto next="#crearEvento"/>
+      </filled>
     </field>
-
-    <field name="confirma_fecha" type="boolean" cond="0.6">
-        ¿has dicho el <val expr="dia" />  del mes <val expr="mes"/> por la <val expr="hora" />?
-        <!-- Si no se ha introducido se vuelve a pedir el tipo de evento-->
-        <filled>
-            <if cond="!confirma_evento">
-                <clear namelist="fecha"/>
-            </if>
-        </filled>
-    </field>
-    <!-- En caso de se una aplicación real se mandaría aquí la petición de sobreescribir la base de datos-->
-    <goto next="#finCreacion"/>
-</form>
-
-<!--
-	Este formulario se ejecuta siempre que ya se ha devuelto alguna información
-	Si se requiere más información se vuelve al menú de selección y si no se pasa
-	al menú principal
--->
-<form id="finCreacion">
-	<field name="repetir">
-		<prompt>
-			Ya ha introducido su evento correctamente
-            ¿Quiere crear otro evento?
-		</prompt>
-		<grammar src="es-sino.jsgf"/>
-		<catch event="nomatch noinput">
-			No te he entendido, responde sí o no.
-		</catch>
-	</field>
-	<filled>
-		<if cond="repetir == 'si'">
-			<goto next="#cearMenu"/>
-		<else/>
-			<goto next="es-menu-inicio.vxml#EscogerSeccion"/>
-		</if>
-	</filled>
-</form>
-
+  </form>
 </vxml>
+
+

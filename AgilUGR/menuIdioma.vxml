@@ -7,8 +7,7 @@ en la similitud fonética del español con el inglés.
 -->
 <menu id = "main">
     <prompt>
-        Bienvenido a ágil U G R, para hablar español, pulse 1 o diga
-        español, if yu wuan to espic in inglis touch to.
+        Bienvenido a ágil U G R, para hablar español, pulse 1. If yu wuan to espic in inglis touch to.
 
     </prompt>
     <choice dtmf="1" next="http://webhosting.voxeo.net/207891/www/AgilUGR/es-menu-inicio.vxml">uno </choice>

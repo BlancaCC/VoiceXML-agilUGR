@@ -24,7 +24,7 @@ así cómo poder salirse
 
 <!-- Seleccion de la seccion. Es lo que se ejecuta tras el menu principal -->
 <menu id="EscogerSeccion">
-		<prompt bargein="false">
+		<prompt >
 			Puedo ayudarle en la consulta o creación de eventos. Indíqueme también si desea salir.
 			Or chein yor idiom.
 		</prompt>
@@ -51,7 +51,7 @@ así cómo poder salirse
 		</choice>
 		<!-- Change idiom -->
 		<choice next="menuIdioma.vxml">
-			idiom
+			idion
 		</choice>
 		<enumerate/>
 

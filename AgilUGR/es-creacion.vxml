@@ -1,5 +1,7 @@
 <vxml version="2.1" xml:lang="es-ES" application="es-creacion.vxml">
 
+<!-- TODO - Este fichero tiene errores internos -->
+
 <!-- Fichero en el que definimos toda la funcionalidad para crear los nuevos eventos -->
 
 <!-- La primera sección que debe ejecutarse es centrosMenu -->

@@ -8,8 +8,6 @@ Se encarga de dar la bienvenida al sistema al usuario y presentar las diferencte
 así cómo poder salirse
 -->
 
-<!-- TODO -- esta pagina tiene un error interno! -->
-
 <!-- La primera sección en ejecutarse es el menú principal  -->
 <link next="\MainMenu">
 </link>

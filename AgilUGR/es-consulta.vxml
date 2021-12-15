@@ -1,5 +1,8 @@
 <vxml version="2.1" xml:lang="es-ES" application="es-consulta.vxml">
 
+
+<!-- TODO - este fichero tiene errores internos -->
+
 <!-- Fichero en el que manejamos las consultas sobre ciertas asignaturas y eventos -->
 
 <!-- La primera sección que debe ejecutarse es centrosMenu -->

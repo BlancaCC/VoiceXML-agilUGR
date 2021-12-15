@@ -1,19 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vxml version="2.1" xml:lang="es-ES">
+<vxml version="2.1" xml:lang="es-ES"> 
+  <!-- Variables globales -->
+  <var name="asignaturaPreguntada"/>
 
-  <!-- La primera sección que debe ejecutarse es centrosMenu -->
-  <goto next="#proximoEvento"/>
-<!--
-  <catch event="event.proximosEventos">
-    <prompt bargein="false">
-      El siguiente evento que tiene usted es  <value expr="tipo_de_evento"/> el día <value expr="dia"/> 
-      de <value expr="mes"/>.
+  <!--
+    Menú de selección .
+    El sistema pregunta por qué información se desea tener: 
+          - Evento más próximo o en una fecha determinada.  
+          - Eventos para una asignatura determinada. 
+    Si el usuario responde salir, el sistema vuelve al menu principal
+    Si el sistema no entiende al usuario con una confianza superior al 60%, lo avisa y vuelve a preguntar.
+  -->
+  <form id="consultaMenu">
+    <field name="tipoInformacion">
+      <prompt timeout="3s">
+        ¿Deseas información de los <emp> próximos eventos </emp> o de los eventos de alguna asignatura en cuestión?
+              Asignaturas posibles son nuevos paradigmas de interacción y procesadores de lenguaje.
       </prompt>
-      <goto next="#preguntarOtraCosa"/>
-  </catch>
--->
+      <catch event="nomatch noinput">
+        Puedo proporcionarte información  sobre tus <emp> próximos eventos </emp> o de asignaturas en concreto
+        <reprompt/>
+      </catch>
+      <grammar src="es-consulta.jsgf"/>
+      <filled>
+        <if cond="tipoInformacion== 'salir'">
+          <goto next="es-menu-inicio.vxml#EscogerSeccion"/>
+        <elseif cond="0.6 > tipoInformacion$.confidence"/>
+          Perdona, no te he entendido bien, me has preguntado por <value expr="tipoInformacion"/>?
+          <clear namelist="tipoInformacion"/>
+        <elseif cond="tipoInformacion== 'proximos eventos'"/>
+          <clear namelist="tipoInformacion"/>
+          <goto next="#proximoEvento"/>
+        <!-- Si se trata de una asignatura-->
+        <else/>
+          <assign name="asignaturaPreguntada" expr="tipoInformacion"/>
+           <clear namelist="tipoInformacion"/>
+          <goto next="#asignatura"/>
+        </if>
+      </filled>
+    </field>
+  </form>
 
-<form id="proximoEvento">
+<!-- 
+  Repuesta para eventos próximos
+  Repite la respuesta hasta que se pida salir
+ -->
+  <form id="proximoEvento">
     <field name="tipoInformacion">
       <prompt>
         Tus próximos eventos son una entrega de N P I el viernes de esta semana
@@ -27,7 +59,6 @@
       </catch>
       <grammar src="es-consulta.jsgf"/>
       <filled>
-      Has seleccionado <value expr="tipoInformacion"/>
         <if cond="tipoInformacion== 'salir'">
           <goto next="es-menu-inicio.vxml#EscogerSeccion"/>
         <else />
@@ -37,41 +68,27 @@
     </field>
   </form>
 
+  <!-- Aporta infomación para asignaturas concretas-->
+  <form id="asignatura">
+    <field name="respuesta">
+        <prompt>
+          -De la asignatura <value expr="asignaturaPreguntada"/> tienes este viernes hasta las doce de la noche la entrega final. 
+          Mucho ánimo.
 
-  <!--
-    Menú de selección .
-    El sistema pregunta por qué información se desea tener: 
-          - Evento más próximo o en una fecha determinada.  
-          - Eventos para una asignatura determinada. 
-    Si el usuario responde salir, el sistema vuelve al menu principal
-    Si el sistema no entiende al usuario con una confianza superior al 60%, lo avisa y vuelve a preguntar.
-  -->
-  <form id="consultaMenu">
-    <field name="tipoInformacion">
-      <prompt>
-        ¿Deseas información de los <emp> próximos eventos </emp> o de los eventos de alguna asignatura en cuestión?
-              Asignaturas posibles son nuevos paradigmas de interacción y procesadores de lenguaje.
-      </prompt>
+          ¿Quieres que repita el evento o quieres salir?
+        </prompt>
       <catch event="nomatch noinput">
-        Puedo proporcionarte información  sobre tus <emp> próximos eventos </emp> o brindarte la posibilidad de <emp>crear</emp> otros nuevos.
-        Tambien puedes decirme <emp>salir</emp> para volver al menu principal.
         <reprompt/>
       </catch>
-      <grammar src="es-consulta.jsgf"/>var name
+      <grammar src="es-consulta.jsgf"/>
       <filled>
-      Has seleccionado <value expr="tipoInformacion"/>
-        <if cond="tipoInformacion== 'salir'">
+        <if cond="respuesta== 'salir'">
           <goto next="es-menu-inicio.vxml#EscogerSeccion"/>
-        <elseif cond="0.6 > tipoInformacion$.confidence"/>
-          Perdona, no te he entendido bien, me has preguntado por <value expr="tipoInformacion"/>?
-          <clear namelist="tipoInformacion"/>
-        <elseif cond="tipoInformacion== 'proximos eventos'"/>
-          <clear namelist="tipoInformacion"/>
-          
+        <else />
+          <clear namelist="respuesta"/>
         </if>
       </filled>
     </field>
   </form>
 
-<goto next="es-menu-inicio.vxml#EscogerSeccion"/>
 </vxml>

@@ -54,26 +54,13 @@
 		<filled>
 			<if cond="0.6 > fijarfecha$.confidence">
 				<clear namelist="fijarfecha"/>
+			<else/>
+			El <value expr="informacion"/> se ha fijado 
+				el  <value expr="fijarfecha"/> . 
 			</if>
 		</filled>
 	</field>
-	<!-- Confirmar que la fecha seleccionada es correcta-->
-	<field name="confirmacion_fecha">
-			<prompt bargein="false">
-				¿Es correcto que el <value expr="informacion"/>
-				sea el  <value expr="fijarfecha"/> ?
-			</prompt>
-			<grammar src="es-sino.jsgf"/>
-			<catch event ="nomatch noinput">
-				No te he entendido, responde si o no.
-			</catch>
-			<filled>
-				<if cond="confirmacion_info == 'no'">
-					<clear namelist="fijarfecha confirmacion_fecha"/>
-					<goto nextitem="fijarfecha"/>
-				</if>
-			</filled>
-		</field>
+	
 
 	<!-- Confirmación de la fecha-->
 	<filled mode="all">

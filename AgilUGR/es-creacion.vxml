@@ -1,46 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xml:lang="es-ES"> 
+
+<!--<link next="\crearEvento"> </link> -->
+
   <!-- Variables globales -->
   <var name="eventoGuardado"/>
+  <var name="fechaGuardada"/>
 
-  <!--
-    Formulario del evento a crear
-  -->
-  <form id="crearEvento">
+<form id="crearEvento">
+  <!-- Añadimos evento-->
     <field name="evento">
       <prompt timeout="3s">
         Qué evento deseas crear
       </prompt>
       <catch event="nomatch noinput">
-        Dime el evento a registrar
         <reprompt/>
       </catch>
       <grammar src="es-eventos.jsgf"/>
       <filled>
-        Has dicho ¿<value expr="evento"/>? 
-        <!-- Todo aquí da un error de que no encuentra la pagina web WTF-->
-        <goto next="#confirmarEvento"/>
+       De acuerdo ¿ y cuándo es <value expr="evento"/>?
+        <if cond="0.4 > evento$.confidence"/>
+          Perdona, no te he entendido bien, me has preguntado por <value expr="tipoInformacion"/>?
+          <clear namelist="evento"/>
+        <else/>
+          <assign name="eventoGuardado" expr="evento"/> 
       </filled>
     </field>
-  </form>
 
-  <form id="confirmarEvento">
-    <field name="confirmar">
-      <prompt timeout="3s">
-        diga sí o no
+  <!-- Pregunta fecha -->
+   <field name="fechaEvento">
+      <prompt timeout="10s">
+        ¿Cuándo quieres fechar <value expr="eventoGuardado"/> ?
       </prompt>
       <catch event="nomatch noinput">
-        Dime el evento a registrar
+      TARARARARA
         <reprompt/>
       </catch>
-      <grammar src="es-sino.jsgf"/>
+      <grammar src="es-fecha.jsgf"/>
       <filled>
-        Has dicho ¿<value expr="confirmar"/>?
-
-        <goto next="#crearEvento"/>
+       De acuerdo he entendido <value expr="fechaEvento"/>?
+       <assign name="fechaGuardada" expr="fechaEvento"/> 
+       <if cond="0.4 > fechaEvento$.confidence"/>
+          Perdona, no te he entendido bien, me has preguntado por <value expr="tipoInformacion"/>?
+          <clear namelist="fechaEvento"/>
+        <else />
+          <assign name="eventoGuardado" expr="fechaEvento"/> 
+        
       </filled>
     </field>
+
   </form>
+
 </vxml>
 
 

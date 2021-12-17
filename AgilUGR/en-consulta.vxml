@@ -14,15 +14,15 @@
   -->
   <form id="consultaMenu">
     <field name="tipoInformacion">
-      <prompt timeout="3s">
+      <prompt timeout="9s">
         Do you wish information about <emp> incoming events </emp> or information about certain subjetc?
         Possible subjects are new interaction paradigms and language processors
       </prompt>
       <!-- En caso de que no se de un input, volvemos a repetir para informar al usuario -->
-      <!-- <catch event="nomatch noinput"> -->
-      <!--   I can give you info about incoming events, or about certain subjects -->
-      <!--   <reprompt/> -->
-      <!-- </catch> -->
+      <catch event="nomatch noinput">
+        I can give you info about incoming events, or about certain subjects
+        <reprompt/>
+      </catch>
 
       <!-- Tomamos las entradasd de la gramatica -->
       <grammar src="en-consulta.jsgf"/>

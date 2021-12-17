@@ -25,7 +25,7 @@ así cómo poder salirse
 <!-- Seleccion de la seccion. Es lo que se ejecuta tras el menu principal -->
 <menu id="EscogerSeccion">
 		<prompt >
-            I can help you with query or creation of events. Also, tell me if you want to exit. O can viar too idiom aa
+            I can help you with query or creation of events. Also, tell me if you want to exit. Or change the idiom
 		</prompt>
         <!-- Posibles expresiones para la consulta de eventos-->
 		<choice next="en-consulta.vxml">
@@ -50,7 +50,7 @@ así cómo poder salirse
 		</choice>
 		<!-- Change idiom -->
 		<choice next="menuIdioma.vxml">
-			Idiom aa
+			Idiom
 		</choice>
 		<enumerate/>
 

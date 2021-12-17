@@ -1,46 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vxml version="2.1" xml:lang="es-ES"> 
-  <!-- Variables globales -->
-  <var name="eventoGuardado"/>
+<vxml version="2.1" xml:lang="es-ES">
 
-  <!--
-    Formulario del evento a crear
-  -->
-  <form id="crearEvento">
-    <field name="evento">
-      <prompt timeout="3s">
-        Qué evento deseas crear
-      </prompt>
-      <catch event="nomatch noinput">
-        Dime el evento a registrar
-        <reprompt/>
-      </catch>
-      <grammar src="es-eventos.jsgf"/>
-      <filled>
-        Has dicho ¿<value expr="evento"/>? 
-        <!-- Todo aquí da un error de que no encuentra la pagina web WTF-->
-        <goto next="#confirmarEvento"/>
-      </filled>
-    </field>
-  </form>
+<!-- Variables globales -->
+<var name="asignaturaPreguntada"/>
 
-  <form id="confirmarEvento">
-    <field name="confirmar">
-      <prompt timeout="3s">
-        diga sí o no
-      </prompt>
-      <catch event="nomatch noinput">
-        Dime el evento a registrar
-        <reprompt/>
-      </catch>
-      <grammar src="es-sino.jsgf"/>
-      <filled>
-        Has dicho ¿<value expr="confirmar"/>?
 
-        <goto next="#crearEvento"/>
-      </filled>
-    </field>
-  </form>
+<form id="crearEvento">
+	<field name="informacion">
+		<prompt>
+			¿Qué tipo de evento te gustaría crear?
+		</prompt>
+		<grammar src="es-eventos.jsgf"/>
+		<catch event="nomatch noinput">
+          	Podrían ser por ejemplo un examen, una entrega o un seminario.
+		    <reprompt/>
+		</catch>
+		<filled>
+			<if cond="0.6 > informacion$.confidence">
+				<goto nextitem="confirmacion_info"/>
+			</if>
+		</filled>
+
+		</field>
+		<!-- Confirmación del evento-->
+		<field name="confirmacion_info">
+			<prompt bargein="false">
+				¿Has dicho <value expr="informacion"/>?
+			</prompt>
+			<grammar src="es-sino.jsgf"/>
+			<catch event ="nomatch noinput">
+				No te he entendido, responde si o no.
+			</catch>
+			<filled>
+				<if cond="confirmacion_info == 'no'">
+					<clear namelist="informacion confirmacion_info"/>
+					<goto next="#crearEvento"/>
+				<else/>
+					<goto nextitem="fijar_fecha"/>
+				</if>
+			</filled>
+		</field>
+
+	<field name="fijar_fecha">
+		<prompt>
+			¿Cuándo deseas fijar el evento?
+		</prompt>
+		<grammar src="es-fecha.jsgf"/>
+		<catch event="nomatch noinput">
+          	Podrían ser un día de la semana por ejemplo de lunes a domingo 
+			o un día y mes. 
+		    <reprompt/>
+		</catch>
+		<filled>
+			<if cond="0.6 > fijar_fecha$.confidence">
+				<goto nextitem="confirmacion_fecha"/>
+			</if>
+		</filled>
+	</field>
+	<!-- Confirmar que la fecha seleccionada es correcta-->
+	<field name="confirmacion_fecha">
+			<prompt bargein="false">
+				¿Es correcto que el <value expr="informacion"/>
+				sea el  <value expr="fijar_fecha"/> ?
+			</prompt>
+			<grammar src="es-sino.jsgf"/>
+			<catch event ="nomatch noinput">
+				No te he entendido, responde si o no.
+			</catch>
+			<filled>
+				<if cond="confirmacion_info == 'no'">
+					<clear namelist="fijar_fecha confirmacion_fecha"/>
+				</if>
+			</filled>
+		</field>
+
+	<!-- Confirmación de la fecha-->
+	<filled mode="all">
+		Todo recibido, el evento ha sido creado con éxito. 
+		<goto next="es-menu-inicio#EscogerSeccion"/>
+	</filled>
+</form>
+
+
+
+
 </vxml>
-
 

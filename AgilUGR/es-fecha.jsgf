@@ -1,14 +1,5 @@
 #JSGF V1.0;
 
-grammar es-fecha;
+grammar esfecha;
 
-public <fecha> = 
-    [<dia_semana> {this.dia=$dia}]
-    [<dia_semana> por la <hora> {this.dia=$dia; 
-                                this.hora=$hora}]
-    [el <dia> de <mes> {this.dia=$dia; this.mes=$mes;}]
-
-<dia_semana> = lunes | martes | miercoles | jueves | viernes | sabado | domingo;
-<hora> = manana| tarde | noche;
-<dia> = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-<mes> = diciembre | enero | febrero;
+public <esfecha> = lunes | martes | miercoles | jueves | viernes | sabado | domingo;

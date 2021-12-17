@@ -1,7 +1,5 @@
 #JSGF V1.0;
 
-grammar consulta;
+grammar yesno;
 
-public <consulta>= <afirmativo> | <negativo> ;
-<afirmativo> = si | vale | claro;
-<negativo> = no | repetir | salir;
+public <yesno>= si | no;

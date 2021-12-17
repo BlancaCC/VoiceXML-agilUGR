@@ -2,7 +2,7 @@
 
 grammar esfecha;
 
-public <esfecha> = <fecha> {this.fijar_fecha=$fecha};
+public <esfecha> = <fecha> {this.fijarfecha="$fecha"};
 
 <fecha> = [articulos] <diasemana> |[articulos] <diames> [articulos] <mes>; 
 <articulos> = el | para | en | de ; 

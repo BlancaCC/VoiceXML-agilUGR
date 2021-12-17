@@ -9,3 +9,16 @@ public <esfecha> = <fecha> {this.fijar_fecha=$fecha};
 <diasemana> = lunes | martes | miercoles | jueves | viernes | sabado | domingo;
 <diames> = uno | dos | tres | cuatro | cinco | seis | siete | ocho | nueve | diez | once | doce | trece | catorce | quince | dieciseis | diecisiete | dieciocho | diecinueve | veinte | veintiuno | ventidos | veintitres | venticuatro | venticino | ventiseis | ventisiete | ventiocho | ventinueve | treinta | treinta y uno;
 <mes> = enero | febrero | marzo | abril | mayo | junio | julio | agosto | septiembre | octubre | noviembre | diciembre; 
+
+
+#JSGF V1.0;
+
+grammar esfecha;
+
+public <esfecha> = <fecha> {this.fijar_fecha="$fecha"};
+
+<fecha> = [articulos] <diasemana> |[articulos] <diames> [articulos] <mes>; 
+<articulos> = el | para | en | de ; 
+<diasemana> = lunes | martes | miercoles | jueves | viernes | sabado | domingo;
+<diames> = uno | dos | tres | cuatro | cinco | seis | siete | ocho | nueve | diez | once | doce | trece | catorce | quince | dieciseis | diecisiete | dieciocho | diecinueve | veinte | veintiuno | ventidos | veintitres | venticuatro | venticino | ventiseis | ventisiete | ventiocho | ventinueve | treinta | treinta y uno;
+<mes> = enero | febrero | marzo | abril | mayo | junio | julio | agosto | septiembre | octubre | noviembre | diciembre; 

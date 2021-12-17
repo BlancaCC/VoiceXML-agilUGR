@@ -36,12 +36,12 @@
 					<clear namelist="informacion confirmacion_info"/>
 					<goto next="#crearEvento"/>
 				<else/>
-					<goto nextitem="fijar_fecha"/>
+					<goto nextitem="fijarfecha"/>
 				</if>
 			</filled>
 		</field>
 
-	<field name="fijar_fecha">
+	<field name="fijarfecha">
 		<prompt>
 			¿Cuándo deseas fijar el evento?
 		</prompt>
@@ -52,9 +52,8 @@
 		    <reprompt/>
 		</catch>
 		<filled>
-			He escuchado <value expr="fichar_fecha"/>
-			<if cond="0.6 > fijar_fecha$.confidence">
-				<clear namelist="fijar_fecha"/>
+			<if cond="0.6 > fijarfecha$.confidence">
+				<clear namelist="fijarfecha"/>
 			</if>
 		</filled>
 	</field>
@@ -62,7 +61,7 @@
 	<field name="confirmacion_fecha">
 			<prompt bargein="false">
 				¿Es correcto que el <value expr="informacion"/>
-				sea el  <value expr="fijar_fecha"/> ?
+				sea el  <value expr="fijarfecha"/> ?
 			</prompt>
 			<grammar src="es-sino.jsgf"/>
 			<catch event ="nomatch noinput">
@@ -70,7 +69,8 @@
 			</catch>
 			<filled>
 				<if cond="confirmacion_info == 'no'">
-					<clear namelist="fijar_fecha confirmacion_fecha"/>
+					<clear namelist="fijarfecha confirmacion_fecha"/>
+					<goto nextitem="fijarfecha"/>
 				</if>
 			</filled>
 		</field>

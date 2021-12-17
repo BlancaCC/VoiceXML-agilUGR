@@ -45,7 +45,7 @@
 		<prompt>
 			¿Cuándo deseas fijar el evento?
 		</prompt>
-		<grammar src="es-fecha.jsgf"/>
+		<grammar src="es-esfecha.jsgf"/>
 		<catch event="nomatch noinput">
           	Podrían ser un día de la semana por ejemplo de lunes a domingo 
 			o un día y mes. 

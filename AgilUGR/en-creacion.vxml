@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="en-US">
+
+<!-- Variables globales -->
+<var name="asignaturaPreguntada"/>
+
+
+<form id="crearEvento">
+	<field name="informacion">
+		<prompt>
+            Which type of event do you want to create?
+		</prompt>
+		<grammar src="en-eventos.jsgf"/>
+		<catch event="nomatch noinput">
+            It could be a deadline or a seminar
+		    <reprompt/>
+		</catch>
+		<filled>
+			<if cond="0.4 > informacion$.confidence">
+				<goto nextitem="confirmacion_info"/>
+			</if>
+		</filled>
+
+		</field>
+		<!-- Confirmación del evento-->
+		<field name="confirmacion_info">
+			<prompt bargein="false">
+                Have you said <value expr="informacion"/>?
+			</prompt>
+			<grammar src="en-sino.jsgf"/>
+			<catch event ="nomatch noinput">
+                I could not understand you, say yes or no
+			</catch>
+			<filled>
+				<if cond="confirmacion_info == 'no'">
+					<clear namelist="informacion confirmacion_info"/>
+					<goto next="#crearEvento"/>
+				<else/>
+					<goto nextitem="fijar_fecha"/>
+				</if>
+			</filled>
+		</field>
+
+	<field name="fijar_fecha">
+		<prompt>
+            When do you want to schedule the event?
+		</prompt>
+		<grammar src="es-esfecha.jsgf"/>
+		<catch event="nomatch noinput">
+            Could be a day of the week for example monday or a day and a month
+		    <reprompt/>
+		</catch>
+		<filled>
+			<if cond="0.4 > fijar_fecha$.confidence">
+				<goto nextitem="confirmacion_fecha"/>
+			</if>
+		</filled>
+	</field>
+	<!-- Confirmar que la fecha seleccionada es correcta-->
+	<field name="confirmacion_fecha">
+			<prompt bargein="false">
+				Is correct that <value expr="informacion"/>
+				is on  <value expr="fijar_fecha"/> ?
+			</prompt>
+			<grammar src="en-sino.jsgf"/>
+			<catch event ="nomatch noinput">
+                I could not understand you, please say yes or no
+			</catch>
+			<filled>
+				<if cond="confirmacion_info == 'no'">
+					<clear namelist="fijar_fecha confirmacion_fecha"/>
+				</if>
+			</filled>
+		</field>
+
+	<!-- Confirmación de la fecha-->
+	<filled mode="all">
+        All went ok, event was created successfully
+		<goto next="es-menu-inicio#EscogerSeccion"/>
+	</filled>
+</form>
+
+
+
+
+</vxml>
+

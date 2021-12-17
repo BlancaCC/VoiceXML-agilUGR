@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="en-US">
+
+<!--
+Fichero inicial en ingles, despues de que el usuario haya elegido hablar en español
+
+Se encarga de dar la bienvenida al sistema al usuario y presentar las diferenctes opciones
+así cómo poder salirse
+-->
+
+<!-- La primera sección en ejecutarse es el menú principal  -->
+<link next="\MainMenu">
+</link>
+
+<!-- Menu principal -->
+<form id="MainMenu">
+	<block>
+		<prompt bargein="false">
+            Hello! I am the conversational assistant from U G R Agile!
+		</prompt>
+		<goto next="#EscogerSeccion"/>
+	</block>
+</form>
+
+<!-- Seleccion de la seccion. Es lo que se ejecuta tras el menu principal -->
+<menu id="EscogerSeccion">
+		<prompt >
+            I can help you with query or creation of events. Also, tell me if you want to exit. Or change the idiom
+		</prompt>
+        <!-- Posibles expresiones para la consulta de eventos-->
+		<choice next="en-consulta.vxml">
+			Query
+		</choice>
+		<choice next="en-consulta.vxml">
+			Next
+		</choice>
+        <!-- Expresiones para la creación-->
+		<choice next="en-creacion.vxml">
+			Create
+		</choice>
+		<choice next="en-creacion.vxml">
+			Add
+		</choice>
+        <!-- Expresiones para salir-->
+		<choice next="#quieroSalir">
+			I want to exit
+		</choice>
+        <choice next="#quieroSalir">
+			Bye!
+		</choice>
+		<!-- Change idiom -->
+		<choice next="menuIdioma.vxml">
+			Idiom
+		</choice>
+		<enumerate/>
+
+</menu>
+<!--
+	Formulario de salida
+	Se despide del usuario y cierra la conexión
+-->
+<form id="quieroSalir">
+	<block>
+		<prompt bargein="false">
+            See you next time!
+		</prompt>
+		<disconnect/>
+	</block>
+</form>
+
+</vxml>

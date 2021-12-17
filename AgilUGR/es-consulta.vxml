@@ -16,7 +16,7 @@
     <field name="tipoInformacion">
       <prompt timeout="3s">
         ¿Deseas información de los <emp> próximos eventos </emp> o de los eventos de alguna asignatura en cuestión?
-              Asignaturas posibles son nuevos paradigmas de interacción y procesadores de lenguaje.
+        Asignaturas posibles son nuevos paradigmas de interacción y procesadores de lenguaje.
       </prompt>
       <!-- En caso de que no se de un input, volvemos a repetir para informar al usuario -->
       <catch event="nomatch noinput">

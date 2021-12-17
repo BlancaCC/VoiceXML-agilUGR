@@ -15,29 +15,29 @@
   <form id="consultaMenu">
     <field name="tipoInformacion">
       <prompt timeout="3s">
-        Do you wish information about <emp> incoming events</emp> or information about certain subjetc?
+        Do you wish information about <emp> incoming events </emp> or information about certain subjetc?
         Possible subjects are new interaction paradigms and language processors
       </prompt>
       <!-- En caso de que no se de un input, volvemos a repetir para informar al usuario -->
-      <catch event="nomatch noinput">
-            I can give you informatio about your <emp> incoming events </emp> or about certain subject
-        <reprompt/>
-      </catch>
+      <!-- <catch event="nomatch noinput"> -->
+      <!--   I can give you info about incoming events, or about certain subjects -->
+      <!--   <reprompt/> -->
+      <!-- </catch> -->
 
       <!-- Tomamos las entradasd de la gramatica -->
       <grammar src="en-consulta.jsgf"/>
       <filled>
           <!-- Salimos de este menu al principal -->
-        <if cond="tipoInformacion== 'salir'">
+        <if cond="tipoInformacion== 'exit'">
           <goto next="en-menu-inicio.vxml#EscogerSeccion"/>
 
           <!-- Comprobamos si el nivel de confianza es demasiado bajo -->
-        <elseif cond="0.6 > tipoInformacion$.confidence"/>
+        <elseif cond="0.4 > tipoInformacion$.confidence"/>
           Sorry, I could not understand you, have you asked for <value expr="tipoInformacion"/>?
           <clear namelist="tipoInformacion"/>
 
           <!-- El usuario ha pedido los siguientes eventos -->
-        <elseif cond="tipoInformacion== 'proximos eventos'"/>
+        <elseif cond="tipoInformacion== 'incoming events'"/>
           <clear namelist="tipoInformacion"/>
           <goto next="#proximoEvento"/>
 
@@ -75,7 +75,7 @@
       <grammar src="en-consulta.jsgf"/>
       <filled>
           <!-- Salimos al menu principal -->
-        <if cond="tipoInformacion== 'salir'">
+        <if cond="tipoInformacion== 'exit'">
           <goto next="en-menu-inicio.vxml#EscogerSeccion"/>
         <else />
           <clear namelist="tipoInformacion"/>
@@ -101,7 +101,7 @@
       <grammar src="en-consulta.jsgf"/>
       <filled>
         <!-- Vamos al menu inicial -->
-        <if cond="respuesta== 'salir'">
+        <if cond="respuesta== 'exit'">
           <goto next="en-menu-inicio.vxml#EscogerSeccion"/>
         <else />
           <clear namelist="respuesta"/>

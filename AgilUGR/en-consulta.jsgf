@@ -2,4 +2,4 @@
 
 grammar consulta;
 
-public <consulta>= incoming events |N P I|P L| new interaction paradimgs
+public <consulta>= incoming events|N P I|P L| new interaction paradimgs | exit;

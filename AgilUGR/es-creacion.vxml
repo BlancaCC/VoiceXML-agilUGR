@@ -45,15 +45,16 @@
 		<prompt>
 			¿Cuándo deseas fijar el evento?
 		</prompt>
-		<grammar src="es-esfecha.jsgf"/>
+		<grammar src="es-fecha.jsgf"/>
 		<catch event="nomatch noinput">
           	Podrían ser un día de la semana por ejemplo de lunes a domingo 
 			o un día y mes. 
 		    <reprompt/>
 		</catch>
 		<filled>
+			He escuchado <value expr="fichar_fecha"/>
 			<if cond="0.6 > fijar_fecha$.confidence">
-				<goto nextitem="confirmacion_fecha"/>
+				<clear namelist="fijar_fecha"/>
 			</if>
 		</filled>
 	</field>

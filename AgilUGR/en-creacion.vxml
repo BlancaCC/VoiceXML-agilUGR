@@ -12,11 +12,11 @@
 		</prompt>
 		<grammar src="en-eventos.jsgf"/>
 		<catch event="nomatch noinput">
-            It could be a deadline or a seminar
+            It could be a test, a deadline or a seminar
 		    <reprompt/>
 		</catch>
 		<filled>
-			<if cond="0.4 > informacion$.confidence">
+			<if cond="0.6 > informacion$.confidence">
 				<goto nextitem="confirmacion_info"/>
 			</if>
 		</filled>
@@ -25,42 +25,7 @@
 		<!-- Confirmación del evento-->
 		<field name="confirmacion_info">
 			<prompt bargein="false">
-                Have you said <value expr="informacion"/>?
-			</prompt>
-			<grammar src="en-sino.jsgf"/>
-			<catch event ="nomatch noinput">
-                I could not understand you, say yes or no
-			</catch>
-			<filled>
-				<if cond="confirmacion_info == 'no'">
-					<clear namelist="informacion confirmacion_info"/>
-					<goto next="#crearEvento"/>
-				<else/>
-					<goto nextitem="fijar_fecha"/>
-				</if>
-			</filled>
-		</field>
-
-	<field name="fijar_fecha">
-		<prompt>
-            When do you want to schedule the event?
-		</prompt>
-		<grammar src="es-esfecha.jsgf"/>
-		<catch event="nomatch noinput">
-            Could be a day of the week for example monday or a day and a month
-		    <reprompt/>
-		</catch>
-		<filled>
-			<if cond="0.4 > fijar_fecha$.confidence">
-				<goto nextitem="confirmacion_fecha"/>
-			</if>
-		</filled>
-	</field>
-	<!-- Confirmar que la fecha seleccionada es correcta-->
-	<field name="confirmacion_fecha">
-			<prompt bargein="false">
-				Is correct that <value expr="informacion"/>
-				is on  <value expr="fijar_fecha"/> ?
+				Have you said <value expr="informacion"/>?
 			</prompt>
 			<grammar src="en-sino.jsgf"/>
 			<catch event ="nomatch noinput">
@@ -68,15 +33,37 @@
 			</catch>
 			<filled>
 				<if cond="confirmacion_info == 'no'">
-					<clear namelist="fijar_fecha confirmacion_fecha"/>
+					<clear namelist="informacion confirmacion_info"/>
+					<goto next="#crearEvento"/>
+				<else/>
+					<goto nextitem="fijarfecha"/>
 				</if>
 			</filled>
 		</field>
 
+	<field name="fijarfecha">
+		<prompt>
+            When do you want to schedule the event?
+		</prompt>
+		<grammar src="en-fecha.jsgf"/>
+		<catch event="nomatch noinput">
+            It could be a dayweek like monday or a day and a month
+		    <reprompt/>
+		</catch>
+		<filled>
+			<if cond="0.4 > fijarfecha$.confidence">
+				<clear namelist="fijarfecha"/>
+			<else/>
+            The <value expr="informacion"/> has been schedule on <value expr="fijarfecha"/> .
+			</if>
+		</filled>
+	</field>
+
+
 	<!-- Confirmación de la fecha-->
 	<filled mode="all">
-        All went ok, event was created successfully
-		<goto next="es-menu-inicio#EscogerSeccion"/>
+        All went ok, event scheduled successfully
+		<goto next="en-menu-inicio#EscogerSeccion"/>
 	</filled>
 </form>
 

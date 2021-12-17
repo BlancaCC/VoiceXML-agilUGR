@@ -1,0 +1,11 @@
+#JSGF V1.0;
+
+grammar esfecha;
+
+public <esfecha> = <fecha> {this.fijarfecha="$fecha"};
+
+<fecha> = [articulos] <diasemana> |[articulos] <diames> [articulos] <mes>;
+<articulos> = the | for | at | in | on ;
+<diasemana> = monday | tuesday | wednesday | thursday | friday | saturday | sunday;
+<diames> = one | two | three | four | five | six | seven | eight | nine | ten | eleven | twelve | thirteen | fourteen | fifteen | sixteen | seventeen | eighteen nineteen | twenty | twenty one | ventidos | twenty three | twenty four | venticino | twenty six | twenty seven | twenty-eight | twenty-nine | thirty | thirty-one;
+<mes> = enero | febrero | marzo | abril | mayo | junio | julio | agosto | septiembre | octubre | noviembre | diciembrejanuary | February | march | April | may | June | july | august | september | october | november | December;

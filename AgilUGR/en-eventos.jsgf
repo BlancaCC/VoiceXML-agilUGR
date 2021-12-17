@@ -1,5 +1,5 @@
 #JSGF V1.0;
 
-grammar eventos;
+grammar eventos_ingles;
 
-public <eventos>= exam | test | deadline | midterm | seminar | lab;
+public <eventos_ingles>= exam | test | deadline | midterm | seminar | lab;
